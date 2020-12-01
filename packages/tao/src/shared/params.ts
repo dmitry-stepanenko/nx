@@ -291,16 +291,13 @@ export async function combineOptionsForGenerator(
   commandLineOpts: Options,
   collectionName: string,
   generatorName: string,
-  ws: WorkspaceConfiguration,
+  ws: WorkspaceConfiguration | null,
   schema: Schema,
   isInteractive: boolean
 ) {
-  const generatorDefaults =
-    ws.generators &&
-    ws.generators[collectionName] &&
-    ws.generators[collectionName][generatorName]
-      ? ws.generators[collectionName][generatorName]
-      : {};
+  const generatorDefaults = ws
+    ? getGeneratorDefaults(ws, collectionName, generatorName)
+    : {};
   let combined = convertAliases(
     coerceTypesInOptions({ ...generatorDefaults, ...commandLineOpts }, schema),
     schema,
@@ -319,24 +316,44 @@ export async function combineOptionsForGenerator(
   return combined;
 }
 
+function getGeneratorDefaults(
+  ws: WorkspaceConfiguration,
+  collectionName: string,
+  generatorName: string
+) {
+  if (!ws.generators) return {};
+  if (
+    ws.generators[collectionName] &&
+    ws.generators[collectionName][generatorName]
+  ) {
+    return ws.generators[collectionName][generatorName];
+  } else if (ws.generators[`${collectionName}:${generatorName}`]) {
+    return ws.generators[`${collectionName}:${generatorName}`];
+  } else {
+    return {};
+  }
+}
+
 async function promptForValues(opts: Options, schema: Schema) {
   const prompts = [];
   Object.entries(schema.properties).forEach(([k, v]) => {
     if (v['x-prompt'] && opts[k] === undefined) {
       const question = {
         name: k,
-        message: v['x-prompt'],
         default: v.default,
       } as any;
 
       if (typeof v['x-prompt'] === 'string') {
+        question.message = v['x-prompt'];
         question.type = v.type;
       } else if (
         v['x-prompt'].type == 'confirmation' ||
         v['x-prompt'].type == 'confirm'
       ) {
+        question.message = v['x-prompt'].message;
         question.type = 'confirm';
       } else {
+        question.message = v['x-prompt'].message;
         question.type = 'list';
         question.choices =
           v['x-prompt'].items &&
