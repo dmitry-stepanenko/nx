@@ -1,5 +1,5 @@
 export interface VitePreviewServerExecutorOptions {
-  buildTarget: string;
+  buildTarget?: string;
   proxyConfig?: string;
   port?: number;
   host?: string | boolean;
@@ -8,4 +8,5 @@ export interface VitePreviewServerExecutorOptions {
   logLevel?: 'info' | 'warn' | 'error' | 'silent';
   mode?: string;
   clearScreen?: boolean;
+  staticFilePath?: string;
 }
