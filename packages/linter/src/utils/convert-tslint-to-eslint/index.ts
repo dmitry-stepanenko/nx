@@ -1,5 +1,5 @@
 export {
-  ConvertTSLintToESLintSchema,
+  type ConvertTSLintToESLintSchema,
   ProjectConverter,
 } from './project-converter';
 

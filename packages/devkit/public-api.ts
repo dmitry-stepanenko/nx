@@ -108,9 +108,9 @@ export { moveFilesToNewDirectory } from './src/utils/move-dir';
  * @category Utils
  */
 export {
-  SharedLibraryConfig,
-  SharedWorkspaceLibraryConfig,
-  AdditionalSharedConfig,
+  type SharedLibraryConfig,
+  type SharedWorkspaceLibraryConfig,
+  type AdditionalSharedConfig,
   applySharedFunction,
   applyAdditionalShared,
   mapRemotes,
@@ -119,11 +119,11 @@ export {
   shareWorkspaceLibraries,
   sharePackages,
   getDependentPackagesForProject,
-  ModuleFederationConfig,
-  ModuleFederationLibrary,
+  type ModuleFederationConfig,
+  type ModuleFederationLibrary,
   readRootPackageJson,
-  WorkspaceLibrary,
-  SharedFunction,
-  WorkspaceLibrarySecondaryEntryPoint,
-  Remotes,
+  type WorkspaceLibrary,
+  type SharedFunction,
+  type WorkspaceLibrarySecondaryEntryPoint,
+  type Remotes,
 } from './src/utils/module-federation';

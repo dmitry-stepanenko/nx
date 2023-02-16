@@ -164,7 +164,7 @@ export function readPackageJson(): any {
   }
 }
 // Original Exports
-export { FileData };
+export { type FileData };
 
 // TODO(v16): Remove these exports
 export {

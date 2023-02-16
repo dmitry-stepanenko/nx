@@ -24,7 +24,7 @@ export {
   updateWorkspaceConfiguration,
   isStandaloneProject,
   getWorkspacePath,
-  WorkspaceConfiguration,
+  type WorkspaceConfiguration,
 } from './deprecated';
 
 /**

@@ -116,7 +116,7 @@ export {
   readWorkspaceConfiguration,
   updateWorkspaceConfiguration,
   isStandaloneProject,
-  WorkspaceConfiguration,
+  type WorkspaceConfiguration,
   getWorkspacePath,
 } from './generators/utils/deprecated';
 
@@ -213,14 +213,14 @@ export { getOutputsForTargetAndConfiguration } from './tasks-runner/utils';
  */
 export {
   defaultTasksRunner,
-  DefaultTasksRunnerOptions,
-  RemoteCache,
+  type DefaultTasksRunnerOptions,
+  type RemoteCache,
 } from './tasks-runner/default-tasks-runner';
 
 /**
  * @category Utils
  */
-export { Hash, Hasher } from './hasher/hasher';
+export { type Hash, Hasher } from './hasher/hasher';
 
 /**
  * @category Utils
